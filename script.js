@@ -1,13 +1,4 @@
 'use strict';
-
-
-/* Hamburger functionality*/
-let toggle = document.querySelector('.toggle');
-let menu = document.querySelector('.menu');
-toggle.onclick = function(){
-  menu.classList.toggle('active')
-}
-
 /**
  * search toggle
  */
@@ -50,5 +41,10 @@ window.addEventListener("scroll", function () {
     backTopBtn.classList.remove("active");
   }
 });
+let toggle = document.querySelector('.toggle');
+let menu = document.querySelector('.menu');
+    toggle.onclick = function(){
+        menu.classList.toggle('active')
+    }
 
 

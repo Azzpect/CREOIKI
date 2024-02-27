@@ -15,12 +15,12 @@ body{
 /* Size and Background  */
 .toggle img
 {
-    width: 70px;
+    width: 100px;
     cursor: pointer;
 }
 .menu li img
 {
-    width: 30px;
+    width: 40px;
     
 }
 /* Video - Tutorial */
@@ -54,11 +54,11 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 60px ;
-    height: 60px;
+    width: 70px ;
+    height: 70px;
     color: var(--clr);
-    border: 2px solid var(--clr);
-    border-radius: 50%;
+    border: 4px solid var(--clr);
+    border-radius: 100%;
     font-size: 1.5em;
     transform: rotate(calc(360deg / -8 * var(--i)));
     transition: 1s;
@@ -85,7 +85,7 @@ body{
     height: 60px;
     background: #f80606;
     border: 2px solid #fff;
-    border-radius: 50%;
+    border-radius: 100%;
     color:white;
     display: flex;
     justify-content: center;
