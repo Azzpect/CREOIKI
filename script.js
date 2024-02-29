@@ -1,4 +1,15 @@
 'use strict';
+/**
+ * search toggle
+ */
+const searchTogglers = document.querySelectorAll("[data-search-toggler]");
+const searchBox = document.querySelector("[data-search-box]");
+
+for (let i = 0; i < searchTogglers.length; i++) {
+  searchTogglers[i].addEventListener("click", function () {
+    searchBox.classList.toggle("active");
+  })
+}
 const navbar = document.querySelector("[data-navbar]");
 const navbarLinks = document.querySelectorAll("[data-nav-link]");
 const navbarToggler = document.querySelector("[data-nav-toggler]");
@@ -12,17 +23,6 @@ for (let i = 0; i < navbarLinks.length; i++) {
   navbarLinks[i].addEventListener("click", function () {
     navbar.classList.remove("active");
     navbarToggler.classList.remove("active");
-  });
-}
-/**
- * search toggle
- */
-const searchTogglers = document.querySelectorAll("[data-search-toggler]");
-const searchBox = document.querySelector("[data-search-box]");
-
-for (let i = 0; i < searchTogglers.length; i++) {
-  searchTogglers[i].addEventListener("click", function () {
-    searchBox.classList.toggle("active");
   });
 }
 /**
@@ -41,3 +41,10 @@ window.addEventListener("scroll", function () {
     backTopBtn.classList.remove("active");
   }
 });
+let toggle = document.querySelector('.toggle');
+let menu = document.querySelector('.menu');
+    toggle.onclick = function(){
+        menu.classList.toggle('active')
+    }
+
+
