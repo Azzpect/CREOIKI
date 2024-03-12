@@ -10,14 +10,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Anta&display=swap" rel="stylesheet">
 </head>
 <body>
-    <form action="" id="Form">
+    <form endpoint="auth" id="Form">
         <h1 class="welcome">Login to CREOIKI</h1> 
         <div class="input-box">
-            <input type="text" placeholder="Enter Username or Email ID" required>
+            <input type="text" name="uname" placeholder="Enter your Username" required>
             <i class='bx bxs-user'></i>
         </div>
         <div class="input-box">
-            <input type="password"placeholder="Enter your Password" required>
+            <input type="password" name="pass" placeholder="Enter your Password" required>
             <i class='bx bxs-lock-alt'></i>
         </div>
         <div class="remember-forgot">
@@ -35,4 +35,5 @@
         <img src="../public/images/logo.png" alt="">
     </form>
 </body>
+<script src="../public/script/auth.js"></script>
 </html>

@@ -24,7 +24,7 @@ async function write_file(fileLoc, newData) {
             if(err) {
                 reject(new Error(JSON.stringify({status: "error", code: 500, message: "Sorry! Some internal error occurred", err: err})))
             }
-            resolve({status: "success", code: 200})
+            resolve({status: "success", code: 201})
         })
     })
 }

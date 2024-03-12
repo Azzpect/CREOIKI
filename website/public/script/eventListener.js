@@ -16,3 +16,4 @@ for(const but of authBut) {
         window.location.href = but.getAttribute("endpoint")
     })
 }
+

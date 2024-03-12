@@ -5,19 +5,19 @@ const jwt = require("jsonwebtoken")
 
 
 async function create_user(req, res, next) {
-    const {uname, pass} = req.body
+    const {uemail, uname, pass} = req.body
     try {
         let userData = await fh.read_file(process.env.USERDATAFILENAME)
-        const user_exist = verify_user(userData.fileData.data, uname, pass)
+        const user_exist = verify_user(userData.fileData.data, uemail, uname, null)
         if(user_exist[0]) {
             delete userData.fileData
-            userData["code"] = 500
+            userData["code"] = 409
             userData["status"] = "error"
-            userData["message"] = "Username already exists"
+            userData["message"] = "Username or Email ID already exists"
             throw new Error(JSON.stringify(userData))
         }
         const hashPassword = hash_password(pass)
-        const userDetails = {"username": uname, "password": hashPassword, "hangman": {"qnsArray": await qns.getQNSArray(), "ansArray": []}}
+        const userDetails = {"username": uname, "email": uemail, "password": hashPassword, "hangman": {"qnsArray": await qns.getQNSArray(), "ansArray": []}}
         const token = generate_auth_token(userDetails)
         userDetails["AUTH_TOKEN"] = token
         userData.fileData.data.push(userDetails)
@@ -35,7 +35,7 @@ async function log_user(req, res, next) {
     const {uname, pass} = req.body
     try {
         let userData = await fh.read_file(process.env.USERDATAFILENAME)
-        const user_exist = verify_user(userData.fileData.data, uname, pass)
+        const user_exist = verify_user(userData.fileData.data, null,uname, pass)
         if(!user_exist[0]) {
             delete userData.fileData
             userData["code"] = 401
@@ -81,10 +81,10 @@ async function delete_user(req, res, next) {
 
 
 
-function verify_user(userData, uname, pass) {
+function verify_user(userData, uemail, uname, pass) {
     for(const user of userData) {
         if(pass == null) {
-            if(user.username == uname) 
+            if(user.username == uname || user.email == uemail) 
                 return [true, userData.indexOf(user)]
         }
         else {
