@@ -8,7 +8,7 @@ async function create_user(req, res, next) {
     const {uemail, uname, pass} = req.body
     try {
         let userData = await fh.read_file(process.env.USERDATAFILENAME)
-        const user_exist = verify_user(userData.fileData.data, uemail, uname, null)
+        const user_exist = verify_user(userData.fileData.data, uemail, uname, null, null)
         if(user_exist[0]) {
             delete userData.fileData
             userData["code"] = 409
@@ -35,7 +35,7 @@ async function log_user(req, res, next) {
     const {uname, pass} = req.body
     try {
         let userData = await fh.read_file(process.env.USERDATAFILENAME)
-        const user_exist = verify_user(userData.fileData.data, null,uname, pass)
+        const user_exist = verify_user(userData.fileData.data, null, uname, pass, null)
         if(!user_exist[0]) {
             delete userData.fileData
             userData["code"] = 401
@@ -52,16 +52,15 @@ async function log_user(req, res, next) {
     next()
 }
 async function delete_user(req, res, next) {
-    const {uname, pass} = req.body
     const token = req.headers.auth_token
     try {
         let userData = await fh.read_file(process.env.USERDATAFILENAME)
-        const user_exist = verify_user(userData.fileData.data, uname, pass)
-        if(user_exist[1] == null || token != userData.fileData.data[user_exist[1]].AUTH_TOKEN){
+        const user_exist = verify_user(userData.fileData.data, null, null, null, token)
+        if(!user_exist[0]){
             delete userData.fileData
             userData["code"] = 401
             userData["status"] = "error"
-            userData["message"] = "Username or Password is incorrect"
+            userData["message"] = "Wrong authentication token"
             throw new Error(JSON.stringify(userData))
         }
         userData.fileData.data.splice(user_exist[1], 1)
@@ -76,14 +75,44 @@ async function delete_user(req, res, next) {
     next()
 }
 
+async function get_user_details(req, res, next) {
+    const token = req.headers.auth_token
+    try {
+        let userData = await fh.read_file(process.env.USERDATAFILENAME)
+        const user_exist = verify_user(userData.fileData.data, null, null, null, token)
+        if(!user_exist[0]){
+            delete userData.fileData
+            userData["code"] = 401
+            userData["status"] = "error"
+            userData["message"] = "Wrong authentication token"
+            throw new Error(JSON.stringify(userData))
+        }
+        let msg = {}
+        msg["code"] = 200
+        let data = userData.fileData.data[user_exist[1]]
+        delete data.AUTH_TOKEN
+        delete data.password
+        delete data.hangman
+        msg["data"] = data
+        req.body.msg = msg
+    }
+    catch(err) {
+        req.body.msg = JSON.parse(err.message)
+    }
+    next()
+}
 
 
 
 
 
-function verify_user(userData, uemail, uname, pass) {
+function verify_user(userData, uemail, uname, pass, token) {
     for(const user of userData) {
-        if(pass == null) {
+        if(token) {
+            if(user.AUTH_TOKEN == token)
+                return [true, userData.indexOf(user)]
+        }
+        else if(pass == null) {
             if(user.username == uname || user.email == uemail) 
                 return [true, userData.indexOf(user)]
         }
@@ -111,4 +140,4 @@ function compare_hash(pass, hash) {
 
 
 
-module.exports = {create_user, log_user, delete_user}
+module.exports = {create_user, log_user, delete_user, get_user_details}

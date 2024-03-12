@@ -127,6 +127,15 @@ header {
     width: 40%;
     height: 45%;
 }
+.user>.profile {
+    display: flex;
+    align-items: center;
+    font-family: var(--secondary-heading-font);
+    font-weight: bold;
+    font-style: normal;
+    font-size: 18px;
+    color: white;
+}
 
 /* game container style  */
 .container {

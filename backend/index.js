@@ -1,5 +1,6 @@
 const express = require("express")
 const path = require("path")
+const cors = require("cors")
 const bodyParser = require("body-parser")
 const user = require("./middleware/user")
 const qns = require("./middleware/qns")
@@ -7,6 +8,7 @@ const qns = require("./middleware/qns")
 const app = express()
 
 app.use(bodyParser.json())
+app.use(cors())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use("/public",express.static(path.join(__dirname, "../website/public")))
 require("dotenv").config()
@@ -41,6 +43,12 @@ app.post("/user/auth", user.log_user, (req, res) => {
     res.status(statusCode).send(msg)
 })
 app.post("/user/delete-user", user.delete_user, (req, res) => {
+    const {msg} = req.body
+    const statusCode = msg.code
+    delete msg.code
+    res.status(statusCode).send(msg)
+})
+app.post("/user/get-user-details", user.get_user_details, (req, res) => {
     const {msg} = req.body
     const statusCode = msg.code
     delete msg.code
