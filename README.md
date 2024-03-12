@@ -1,4 +1,0 @@
-Eat 
-Sleep 
-code 
-repeat
