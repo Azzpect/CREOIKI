@@ -41,7 +41,6 @@ li {
     transform: skewX(-35deg);
     background-color: red;
     box-shadow: none;
-    border-radius: 10px;
     transition: all 0.2s linear;
 }
 .btn>h2 {
@@ -91,7 +90,6 @@ header {
 }
 .navitem {
     padding: 10px;
-    border-radius: 10px;
     cursor: pointer;
     transition: all 0.2s linear;
 }
@@ -134,7 +132,7 @@ header {
     height: 80vh;
     display: flex;
     justify-content: space-around;
-    background: url("/public/images/bg.jpg") no-repeat center center/cover;
+    background: url("bg.jpg") no-repeat center center/cover;
 }
 .container>.welcome-text-container {
     position: relative;
@@ -174,21 +172,30 @@ header {
     margin-top: 15%;
     border: 1px solid black;
     width: 100vw;
-    height: 40vh;
+    height: 30vh;
     background-color: var(--primary-bg-color);
     display: flex;
-    flex-direction: row-reverse;
+    justify-content: space-between;
     align-items: center;
+}
+.footer>.Foot-Logo{
+    width: 17%;
+    height: 90%;
+    padding: 5px 0 0 10px;
 }
 .footer>.social-media-container {
     display: flex;
     align-items: center;
     justify-content: space-around;
     width: 15%;
-    height: 15%;
+    height: 40%;
     background-color: red;
     transform: skewX(50deg);
 }
 .footer>.social-media-container>.social-media-handles {
     transform: skewX(-50deg);
+}
+.footer>p{
+    color: aliceblue;
+    align-self: flex-end;
 }
