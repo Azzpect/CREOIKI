@@ -13,9 +13,15 @@ require("dotenv").config()
 
 
 
-
+//routes to handle web pages
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "../website/index.html"))
+})
+app.get("/auth/signup", (req, res) => {
+    res.sendFile(path.join(__dirname, "../website/signup.html"))
+})
+app.get("/auth/login", (req, res) => {
+    res.sendFile(path.join(__dirname, "../website/login.html"))
 })
 app.get("/hangman", (req, res) => {
     res.sendFile(path.join(__dirname, "../website/hangman.html"))
