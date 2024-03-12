@@ -9,7 +9,7 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-image: url(hero-bg.jpg);
+    background: url("../images/bg.jpg") no-repeat center center/cover;
 }
 #Form{
     display: flex;
@@ -20,7 +20,7 @@ body{
     height: 90vh;
     background-color:#0e0826;
     border-radius: 15px;
-    box-shadow: 6px 6px 4px 2px rgb(6, 1, 41);
+    box-shadow: 10px 10px 10px 5px black;
 }
 #Form>h1{
     font-size: 30px;
@@ -52,20 +52,22 @@ i{
     position: absolute;
     right: 5%;
 }
-.remeber-forgot{
+.remember-forgot{
     width: 70%;
     display: flex;
     justify-content: space-between;
     font-size: 14px;
 }
-.remeber-forgot input{
-    accent-color: rgb(151, 145, 145);
+.remember-forgot>div {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
 }
-.remeber-forgot a{
+.remember-forgot a{
     text-decoration: none;
     color: rgb(151, 145, 145);
 }
-.remeber-forgot a:hover{
+.remember-forgot a:hover{
     text-decoration: underline;
 }
 .btn{
