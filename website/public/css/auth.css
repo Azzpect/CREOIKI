@@ -9,11 +9,23 @@
     font-family: "Josefin Sans", sans-serif;
 }
 body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
     background: url("../images/bg.jpg") no-repeat center center/cover;
+}
+.message {
+    width: 100vw;
+    height: 5vh;
+    display: none;
+    justify-content: space-between;
+    padding: 0 15px;
+    align-items: center;
+    background-color: red;
+    box-sizing: border-box;
+}
+.message>button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
 }
 #Form{
     display: flex;
@@ -22,6 +34,7 @@ body{
     align-items: center;
     width: 30vw;
     height: 90vh;
+    margin: auto;
     background-color:#0e0826;
     border-radius: 15px;
     box-shadow: 10px 10px 10px 5px black;

@@ -1,4 +1,4 @@
-const auth_token = sessionStorage.getItem("auth-token")
+const auth_token = sessionStorage.getItem("auth-token") || localStorage.getItem("auth-token")
 if(auth_token) {
     getUserDetails(auth_token).then(data => {
         const user_section = document.querySelector("header>.navbar>.user")

@@ -17,6 +17,11 @@ for(const but of authBut) {
     })
 }
 
+let err_msg_but = document.querySelector(".message>button")
+err_msg_but.addEventListener("click", e => {
+    document.querySelector(".message").style.display = "none";
+})
+
 
 const form = document.getElementById("Form")
 if(form) {
@@ -27,6 +32,7 @@ if(form) {
         formData.forEach((value, key) => {
             formDataObj[key] = value
         })
+        form.reset()
         fetch(`http://127.0.0.1:8800/user/${form.getAttribute("endpoint")}`, {
             method: "POST",
             headers: {
@@ -36,8 +42,19 @@ if(form) {
         }).then(res => {
             return res.json()
         }).then(data => {
-            sessionStorage.setItem("auth-token", data.auth_token)
-            window.location.href = "../../"
+            if(data.status == 'success') {
+                if(formDataObj.remember)
+                    localStorage.setItem("auth-token", data.auth_token)
+                else
+                    sessionStorage.setItem("auth-token", data.auth_token) 
+                window.location.href = "../../"
+            }
+            else {
+                let msg_cont = document.querySelector(".message")
+                let msg = document.querySelector(".message>.msg-text")
+                msg_cont.style.display = "flex";
+                msg.innerHTML = `${data.status.toUpperCase()}! ${data.message}`
+            }
         }).catch(err => {
             console.log(err)
         })
