@@ -2,9 +2,10 @@ const bcrypt = require("bcrypt")
 const fh = require("./fileHandling")
 const qns = require("./qns")
 const jwt = require("jsonwebtoken")
+const {decryptData} = require("./verify_email")
 
 
-async function create_user(req, res, next) {
+async function verify_user_and_email(req, res, next) {
     const {uemail, uname, pass} = req.body
     try {
         let userData = await fh.read_file(process.env.USERDATAFILENAME)
@@ -16,19 +17,27 @@ async function create_user(req, res, next) {
             userData["message"] = "Username or Email ID already exists"
             throw new Error(JSON.stringify(userData))
         }
-        const hashPassword = hash_password(pass)
-        const userDetails = {"username": uname, "email": uemail, "password": hashPassword, "hangman": {"qnsArray": await qns.getQNSArray(), "ansArray": []}}
-        const token = generate_auth_token(userDetails)
-        userDetails["AUTH_TOKEN"] = token
-        userData.fileData.data.push(userDetails)
-        let msg = await fh.write_file(process.env.USERDATAFILENAME, JSON.stringify(userData.fileData, null, 4))
-        msg["message"] = "Account created successfully"
-        msg["auth_token"] = token
-        req.body.msg = msg
+        req.body.msg = {"code": 202, "status": "success", "message": {uemail, uname, pass}}
     }
     catch(err) {
         req.body.msg = JSON.parse(err.message)
     }
+    next()
+}
+async function create_user(req, res, next) {
+    const encryptedData = req.query
+    console.log(encryptedData)
+    const data = JSON.parse(decryptData(encryptedData.data, encryptedData.iv))
+    const hashPassword = hash_password(data.pass)
+    const userDetails = {"username": data.uname, "email": data.uemail, "password": hashPassword, "hangman": {"qnsArray": await qns.getQNSArray(), "ansArray": []}}
+    const token = generate_auth_token(userDetails)
+    userDetails["AUTH_TOKEN"] = token
+    let userData = await fh.read_file(process.env.USERDATAFILENAME)
+    userData.fileData.data.push(userDetails)
+    let msg = await fh.write_file(process.env.USERDATAFILENAME, JSON.stringify(userData.fileData, null, 4))
+    msg["message"] = "Account created successfully"
+    msg["auth_token"] = token
+    req.body.msg = msg
     next()
 }
 async function log_user(req, res, next) {
@@ -125,7 +134,7 @@ function verify_user(userData, uemail, uname, pass, token) {
 }
 
 
-
+//password related function
 function generate_auth_token(user) {
     return jwt.sign(user, process.env.AUTH_KEY)
 }
@@ -140,4 +149,5 @@ function compare_hash(pass, hash) {
 
 
 
-module.exports = {create_user, log_user, delete_user, get_user_details}
+
+module.exports = { verify_user_and_email, create_user, log_user, delete_user, get_user_details}
