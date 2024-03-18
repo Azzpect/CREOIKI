@@ -18,9 +18,10 @@ for(const but of authBut) {
 }
 
 let err_msg_but = document.querySelector(".message>button")
-err_msg_but.addEventListener("click", e => {
-    document.querySelector(".message").style.display = "none";
-})
+if(err_msg_but)
+    err_msg_but.addEventListener("click", e => {
+        document.querySelector(".message").style.display = "none";
+    })
 
 
 const form = document.getElementById("Form")
@@ -52,4 +53,12 @@ if(form) {
         document.querySelector(".message>.msg-text").innerHTML=`${res.status.toUpperCase()}! ${res.message}`;
     })
 }
+
+
+document.querySelector(".user").addEventListener("click", e => {
+    document.querySelector(".menu-items-container").style.display = "flex"
+})
+document.querySelector("#Cross").addEventListener("click", e => {
+    document.querySelector(".menu-items-container").style.display = "none"
+})
 
