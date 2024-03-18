@@ -217,23 +217,18 @@ header {
     right: 0;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     align-items: center;
-    width: 30vw;
-    height: 70vh;
-    margin: auto;
+    width: 25vw;
+    height: 60vh;
     background-color:#0e0826;
     border-radius: 15px;
     border: 1px solid rgb(91, 73, 96);
 }
 .menu-items-container>.card{
     border: 2px solid white;
-    width: 55%;
+    width: 70%;
     height: 30%;
-    margin:5% 5%;
-}
-hr{
-    width: 100%;
-    border:1.5px solid rgb(48, 38, 50);
 }
 #Cross{
    align-self: flex-end;
@@ -242,15 +237,15 @@ hr{
    cursor: pointer;
 }
 .menu-items-container>.menu{
+    border-top: 2px solid rgb(48, 38, 50);
     width: 100%;
     display: flex;
     flex-direction: column;
-    row-gap: 5px;
+    justify-content: space-around;
     align-items: center;
 }
 .menu-items-container>.menu>a{
     color:rgb(152 121 160);
-    text-decoration: none;
     text-align: center;
     border-bottom: 3px solid rgb(48, 38, 50);
     width: 100%;
