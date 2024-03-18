@@ -1,11 +1,10 @@
 const nodemailer = require("nodemailer")
-const {OAuth2Client} = require("google-auth-library")
 const crypto = require("crypto")
+const { OAuth2Client } = require("google-auth-library")
 
 
 
 async function sendVerificationEmail(data) {
-
   const encryptedData = encryptData(JSON.stringify(data))
   const EMAIL = process.env.EMAIL
   const CLIENT_ID = process.env.CLIENT_ID

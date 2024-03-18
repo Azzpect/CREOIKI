@@ -26,7 +26,6 @@ async function verify_user_and_email(req, res, next) {
 }
 async function create_user(req, res, next) {
     const encryptedData = req.query
-    console.log(encryptedData)
     const data = JSON.parse(decryptData(encryptedData.data, encryptedData.iv))
     const hashPassword = hash_password(data.pass)
     const userDetails = {"username": data.uname, "email": data.uemail, "password": hashPassword, "hangman": {"qnsArray": await qns.getQNSArray(), "ansArray": []}}

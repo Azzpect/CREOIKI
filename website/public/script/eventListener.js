@@ -25,7 +25,7 @@ err_msg_but.addEventListener("click", e => {
 
 const form = document.getElementById("Form")
 if(form) {
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit",async (e) => {
         e.preventDefault()
         const formData = new FormData(form)
         const formDataObj = {}
@@ -33,31 +33,23 @@ if(form) {
             formDataObj[key] = value
         })
         form.reset()
-        fetch(`http://127.0.0.1:8800/user/${form.getAttribute("endpoint")}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(formDataObj)
-        }).then(res => {
-            return res.json()
-        }).then(data => {
-            if(data.status == 'success') {
-                if(formDataObj.remember)
-                    localStorage.setItem("auth-token", data.auth_token)
-                else
-                    sessionStorage.setItem("auth-token", data.auth_token) 
+        let res;
+        if(form.getAttribute("endpoint")=="verify-credentials")
+            res = await fetchingCreateUserAction(formDataObj);
+        else if(form.getAttribute("endpoint") == "auth") {
+            res = await verifyUserLogIn(formDataObj)
+            if(formDataObj.remember == "on")
+                localStorage.setItem("auth-token", res.auth_token)
+            else
+                sessionStorage.setItem("auth-token", res.auth_token)
+            if(res.status == "success")
                 window.location.href = "../../"
-            }
-            else {
-                let msg_cont = document.querySelector(".message")
-                let msg = document.querySelector(".message>.msg-text")
-                msg_cont.style.display = "flex";
-                msg.innerHTML = `${data.status.toUpperCase()}! ${data.message}`
-            }
-        }).catch(err => {
-            console.log(err)
-        })
+        }
+        else
+            res = {"status": "error", "message": "Server is not responding."}
+            
+        document.querySelector(".message").style.display = "flex";
+        document.querySelector(".message>.msg-text").innerHTML=`${res.status.toUpperCase()}! ${res.message}`;
     })
 }
 
