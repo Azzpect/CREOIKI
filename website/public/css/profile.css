@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Anta&display=swap');
 *{
     margin: 0;padding: 0;
+    box-sizing: border-box;
 }
 body{
     background: url("../images/bg.jpg") no-repeat center center/cover;
@@ -51,32 +52,40 @@ display: none;
     font-family: Anta;
 }
 .profile-body>.edit{
-    width: 100%;
+    width: 85%;
     height: 12%;
 }
 .profile-body>.edit>p{
-    color:rgb(152 121 160);;
+    color:rgb(152 121 160);
     font-size: 18px;
     font-family: Anta;
     font-weight: bolder;
     margin: 0 0 5px 10px;
 }
-.profile-body>.edit>#Bio{
-    width: 98%;
-    height: 22px;
-    border-radius: 5px;
-    padding: 3px;
+.profile-body>.edit>#bio{
+    height: 35px;
+   
     
 }
-.profile-body>.edit>#Username{
-    width: 98%;
-    height: 22px;
+.profile-body>.edit>.input{
+    width: 100%;
+    height: 27px;
     border-radius: 5px;
     padding: 3px;
+    outline: none;
 }
-.profile-body>.edit>#Name{
-    width: 98%;
-    height: 22px;
-    border-radius: 5px;
-    padding: 3px;
+.profile-body>.btn{
+    height: 40px;
+    width: 125px;
+    border-radius: 22px;
+    background-color:  rgb(43 35 67);
+    border: none;
+    color: aliceblue;
+    box-shadow:  5px 5px 5px 2px black;
+    font-size: 16px;
+    font-family: Anta;
+    align-self: flex-start;
+    margin:2% 8%;
 }
+
+
