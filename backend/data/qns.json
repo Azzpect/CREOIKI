@@ -1,0 +1,16 @@
+{
+    "data": [
+        {
+            "answer": "something",
+            "hints": ["hint1", "hint2", "hint3", "hint4"]
+        }, 
+        {
+            "answer": "something1",
+            "hints": ["hint1", "hint2", "hint3", "hint4"]
+        },
+        {
+            "answer": "something3",
+            "hints": ["hint1", "hint2", "hint3", "hint4"]
+        }
+    ]
+}

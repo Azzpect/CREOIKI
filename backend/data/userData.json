@@ -1,0 +1,18 @@
+{
+    "data": [
+        {
+            "username": "Souradeep Roy",
+            "email": "roysouradeep19@gmail.com",
+            "password": "$2b$10$zflgHpavsSJYD6hdEEDX1uOe9.bmJ8RhPLMo.DA7t9J0DfUK9.fqu",
+            "hangman": {
+                "qnsArray": [
+                    1,
+                    0,
+                    2
+                ],
+                "ansArray": []
+            },
+            "AUTH_TOKEN": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlNvdXJhZGVlcCBSb3kiLCJlbWFpbCI6InJveXNvdXJhZGVlcDE5QGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJHpmbGdIcGF2c1NKWUQ2aGRFRURYMXVPZTkuYm1KOFJoUExNby5EQTd0OUowRGZVSzkuZnF1IiwiaGFuZ21hbiI6eyJxbnNBcnJheSI6WzEsMCwyXSwiYW5zQXJyYXkiOltdfSwiaWF0IjoxNzEwNTEzNTExfQ._s6IV3Zkl8JJ-0vVZFan95pk51k2XPf_CYgi53ebURQ"
+        }
+    ]
+}
